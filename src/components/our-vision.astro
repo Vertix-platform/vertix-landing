@@ -1,0 +1,21 @@
+---
+import { EarlyAccessModal } from "./custom/EarlyAccessModal";
+---
+
+<section id="our-vision" class="h-screen px-4 lg:px-8 mt-24">
+    <div class="container mx-auto text-white">
+        <h1 class="text-4xl font-bold">Our Vision</h1>
+        <p class="text-lg">
+            At Vertix, we're building a revolutionary platform to redefine digital ownership. Our goal is to empower creators and traders with the tools they need to thrive in the digital economy. Early adopters will receive exclusive updates, have a voice in shaping the platform's future, and gain access to unique rewards.
+        </p>
+
+        <div class="flex flex-col items-center justify-center text-center">
+            <h1 class="text-2xl font-bold">Join Our Early Access Program</h1>
+            <p class="text-lg mb-8">Get exclusive access to new features and early adopter rewards.</p>
+
+            <EarlyAccessModal
+                client:load
+            />
+        </div>
+    </div>
+</section>

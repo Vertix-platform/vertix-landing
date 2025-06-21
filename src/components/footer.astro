@@ -1,0 +1,22 @@
+---
+import { navLinks, socialLinks } from "../constants";
+
+---
+
+<footer class="flex flex-col items-center justify-center py-4 mb-10 space-y-6">
+    <div class="flex items-center justify-center gap-[30px]">
+        {navLinks.map(link => (
+            <a href={link.href} class="text-base -tracking-tighter text-foreground hover:text-accent transition-colors py-2 px-4">{link.label}</a>
+        ))}
+    </div>
+    <div class="flex items-center justify-center gap-4">
+        {socialLinks.map(link => (
+            <a href={link.href} class="text-foreground hover:text-accent transition-colors py-2 px-4">
+                <i class={`${link.icon} text-2xl`}></i>
+            </a>
+        ))}
+    </div>
+    <p class="text-foreground text-base">
+        &copy; {new Date().getFullYear()} Vertix. All rights reserved.
+    </p>
+</footer>
