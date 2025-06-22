@@ -65,7 +65,9 @@ export default function Navbar() {
         <div className="fixed inset-0 -top-5 -left-4 md:-left-5 right-0 bottom-0 translate-x-0 z-50 w-screen h-screen bg-black/90 backdrop-blur-md flex flex-col justify-between p-8 xl:hidden transition-all">
           <div className="w-full h-full">
             <div className="flex justify-between items-center mb-12">
-              <span className="font-bold text-2xl tracking-wide text-white">Vertix</span>
+              <a href="/">
+                <VertixLogo />
+              </a>
               <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
                 <i className="ri-close-line text-2xl text-white"></i>
               </button>
