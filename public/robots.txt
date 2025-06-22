@@ -5,4 +5,4 @@ Allow: /
 Sitemap: https://vertix.market/sitemap.xml
 
 # Crawl-delay
-Crawl-delay: 1 
+Crawl-delay: 1

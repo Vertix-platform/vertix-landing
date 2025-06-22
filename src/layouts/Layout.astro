@@ -38,7 +38,7 @@ const {
 		<meta name="author" content="Vertix" />
 		<meta name="robots" content="index, follow" />
 		<link rel="canonical" href={canonical} />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonical} />
@@ -47,7 +47,7 @@ const {
 		<meta property="og:image" content={new URL(image, Astro.url)} />
 		<meta property="og:site_name" content="Vertix" />
 		<meta property="og:locale" content="en_US" />
-		
+
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={canonical} />
@@ -55,17 +55,17 @@ const {
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 		<meta name="twitter:creator" content="@vertix_market" />
-		
+
 		<!-- Additional SEO -->
 		<meta name="theme-color" content="#000000" />
 		<meta name="msapplication-TileColor" content="#000000" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		
+
 		<!-- Preconnect to external domains -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		
+
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
