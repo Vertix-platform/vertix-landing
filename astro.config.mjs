@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://vertix.market',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

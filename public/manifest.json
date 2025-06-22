@@ -1,0 +1,21 @@
+{
+  "name": "Vertix - Digital Identity Platform",
+  "short_name": "Vertix",
+  "description": "Own, Trade, and Monetize Digital Identity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "finance", "productivity"],
+  "lang": "en",
+  "dir": "ltr"
+} 

@@ -1,0 +1,5 @@
+Contact: mailto:security@vertix.market
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://vertix.market/.well-known/security.txt
+Policy: https://vertix.market/security-policy 

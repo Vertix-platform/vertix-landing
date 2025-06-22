@@ -1,21 +1,53 @@
 ---
 import { EarlyAccessModal } from "./custom/EarlyAccessModal";
+import { MotionDiv } from "./ui/motion";
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+};
 ---
 
-<section id="our-vision" class="h-screen px-4 lg:px-8 mt-24">
-    <div class="container mx-auto text-white">
-        <h1 class="text-4xl font-bold">Our Vision</h1>
-        <p class="text-lg">
-            At Vertix, we're building a revolutionary platform to redefine digital ownership. Our goal is to empower creators and traders with the tools they need to thrive in the digital economy. Early adopters will receive exclusive updates, have a voice in shaping the platform's future, and gain access to unique rewards.
-        </p>
+<section id="our-vision" class="py-16 px-4 lg:px-0" aria-labelledby="our-vision-heading">
+    <div class="container mx-auto text-white space-y-12">
+        <MotionDiv
+            client:visible
+            className="max-w-3xl mx-auto text-center mb-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+            variants={itemVariants}
+        >
+            <h2 id="our-vision-heading" class="text-4xl md:text-5xl font-bold mb-6">Our Vision</h2>
+            <p class="text-lg text-white/80">
+                At Vertix, we're building a revolutionary platform to redefine digital ownership. Our goal is to empower creators and traders with the tools they need to thrive in the digital economy. Early adopters will receive exclusive updates, have a voice in shaping the platform's future, and gain access to unique rewards.
+            </p>
+        </MotionDiv>
 
-        <div class="flex flex-col items-center justify-center text-center">
-            <h1 class="text-2xl font-bold">Join Our Early Access Program</h1>
-            <p class="text-lg mb-8">Get exclusive access to new features and early adopter rewards.</p>
-
-            <EarlyAccessModal
-                client:load
-            />
-        </div>
+        <MotionDiv
+            client:visible
+            className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-lg p-8 md:p-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            variants={itemVariants}
+        >
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-4">Join Our Early Access Program</h2>
+                    <p class="text-white/70 mb-6">
+                        Get exclusive access to new features and early adopter rewards.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center">
+                    <EarlyAccessModal
+                        client:load
+                        className="px-5 py-4 h-12 w-full"
+                    />
+                </div>
+            </div>
+        </MotionDiv>
     </div>
 </section>

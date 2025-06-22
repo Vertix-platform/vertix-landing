@@ -1,6 +1,7 @@
 ---
 import { WavyBackground } from "./ui/wavy-background";
 import { EarlyAccessModal } from "./custom/EarlyAccessModal";
+import { MotionDiv } from "./ui/motion";
 
 const socialLinks = [
   { label: 'X', icon: 'ri-twitter-x-line', href: 'https://x.com/vertix_market' },
@@ -9,24 +10,67 @@ const socialLinks = [
 //   { label: 'LinkedIn', icon: 'ri-linkedin-box-line', href: '#' },
 ];
 ---
-<header class="w-full h-screen px-4 lg:px-8">
-  <div class="relative w-full mx-auto mt-24 rounded-3xl overflow-hidden shadow-2xl h-[85vh] lg:h-[80vh] xl:h-[85vh]">
+<section class="w-full h-screen px-4 lg:px-8" role="banner" aria-labelledby="hero-heading">
+  <div class="relative w-full mx-auto mt-24 rounded-3xl overflow-hidden shadow-2xl h-screen lg:h-[80vh] xl:h-[85vh]">
     <WavyBackground containerClassName="w-full h-[85vh] lg:h-[80vh] xl:h-[85vh] object-cover object-center" client:load />
     <div class="absolute inset-0 flex flex-col justify-center px-4 lg:px-8 py-12 bg-gradient-to-br from-black/60 to-black/20">
-      <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6" style="word-break:break-word;">Own,Trade, and<br/>Monetize Digital Identity</h1>
-      <p class="text-2xl md:text-3xl text-white/80 font-medium max-w-xl">Empowering gamers, creators, and digital entrepreneurs to control their digital assets.</p>
-      <div class="mt-8">
-        <EarlyAccessModal
-          client:load
-        />
-      </div>
+      <MotionDiv
+        client:visible
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <h1 id="hero-heading" class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6" style="word-break:break-word;">Own, Trade, and<br/>Monetize Digital Identity</h1>
+      </MotionDiv>
+
+      <MotionDiv
+        client:visible
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+      >
+        <p class="text-2xl md:text-3xl text-white/80 font-medium max-w-xl">Empowering gamers, creators, and digital entrepreneurs to control their digital assets.</p>
+      </MotionDiv>
+
+      <MotionDiv
+        client:visible
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+      >
+        <div class="mt-8">
+          <EarlyAccessModal
+            client:load
+            className="px-5 py-3 h-12"
+          />
+        </div>
+      </MotionDiv>
     </div>
-    <div class="absolute bottom-6 right-6 flex gap-4 z-10">
-      {socialLinks.map(link => (
-        <a href={link.href} class="rounded-xl bg-white/10 backdrop-blur-md p-3 border border-white/30">
-          <i class={`${link.icon} text-2xl text-white`}></i>
-        </a>
-      ))}
-    </div>
+
+    <nav aria-label="Social media links" class="absolute bottom-6 right-6 flex gap-4 z-10">
+      <MotionDiv
+        client:visible
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+        className="flex gap-4"
+      >
+        {socialLinks.map(link => (
+          <a 
+            href={link.href} 
+            class="rounded-xl bg-white/10 backdrop-blur-md p-3 border border-white/30"
+            aria-label={`Follow us on ${link.label}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class={`${link.icon} text-2xl text-white`} aria-hidden="true"></i>
+          </a>
+        ))}
+      </MotionDiv>
+    </nav>
   </div>
-</header>
+</section>

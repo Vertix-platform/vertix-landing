@@ -9,17 +9,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 interface EarlyAccessModalProps {
   trigger?: React.ReactNode;
   className?: string;
-  onJoin?: (email: string, name: string, country: string) => void;
 }
 
 export function EarlyAccessModal({
   trigger,
-  className = "",
-  onJoin
+  className = ""
 }: EarlyAccessModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,35 +26,42 @@ export function EarlyAccessModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim() || !name.trim()) return;
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
 
-    setIsSubmitting(true);
-    try {
-      if (onJoin) {
-        await onJoin(email, name, country);
-      } else {
-        // Default behavior - you can customize this
-        console.log('Joining early access with email:', email);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-      setEmail('');
-      setIsOpen(false);
-    } catch (error) {
-      console.error('Error joining early access:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+        try {
+            const response = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, name, country }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success(data.message);
+                setIsOpen(false);
+                setName('');
+                setEmail('');
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error('Something went wrong. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {trigger || (
           <Button
-            className={`bg-accent border border-border/20 px-4 py-2 rounded-full w-fit text-white font-semibold hover:bg-accent/50 transition-colors ${className}`}
+            className={`bg-accent border border-border/20 px-4 py-2 rounded-full text-base w-fit text-white font-semibold hover:bg-accent/50 transition-colors ${className}`}
           >
             Join Early Access
           </Button>
