@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { actions } from 'astro:actions';
 
 interface EarlyAccessModalProps {
   trigger?: React.ReactNode;
@@ -26,35 +27,32 @@ export function EarlyAccessModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-        try {
-            const response = await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, name, country }),
-            });
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('name', name);
+      formData.append('country', country);
 
-            const data = await response.json();
+      const result = await actions.subscribe(formData);
 
-            if (response.ok) {
-                toast.success(data.message);
-                setIsOpen(false);
-                setName('');
-                setEmail('');
-            } else {
-                toast.error(data.message);
-            }
-        } catch (error) {
-            toast.error('Something went wrong. Please try again.');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+      // Astro Actions return { data, error } structure
+      if (result.data?.success) {
+        toast.success(result.data.message);
+        setIsOpen(false);
+        setName('');
+        setEmail('');
+        setCountry('');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -87,7 +85,6 @@ export function EarlyAccessModal({
                     id="name"
                     type="text"
                     value={name}
-                    autoComplete='off'
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
                     className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
@@ -101,7 +98,6 @@ export function EarlyAccessModal({
               id="email"
               type="email"
               value={email}
-              autoComplete='off'
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
               className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
@@ -116,7 +112,6 @@ export function EarlyAccessModal({
                 id="country"
                 type="text"
                 value={country}
-                autoComplete='off'
                 onChange={(e) => setCountry(e.target.value)}
                 placeholder="Enter your country"
                 className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
