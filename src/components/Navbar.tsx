@@ -81,6 +81,11 @@ export default function Navbar() {
               <li>
                 <EarlyAccessModal
                   className="mt-4 bg-accent border border-border/20 px-4 py-2 rounded-full text-white font-semibold hover:bg-accent/50 transition-colors"
+                  onOpenChange={(open) => {
+                    if (open) {
+                      setMenuOpen(false);
+                    }
+                  }}
                 />
               </li>
             </ul>

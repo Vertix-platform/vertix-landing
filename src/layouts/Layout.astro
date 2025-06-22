@@ -67,7 +67,7 @@ const {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 		<!-- Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify({
+		<script type="application/ld+json" set:html={{
 			"@context": "https://schema.org",
 			"@type": "Organization",
 			"name": "Vertix",
@@ -82,7 +82,7 @@ const {
 				"contactType": "customer service",
 				"availableLanguage": "English"
 			}
-		})} />
+		}} />
 	</head>
 	<body>
 		<slot />

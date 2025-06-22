@@ -36,7 +36,7 @@ export function FeaturesGrid({ features }: FeaturesGridProps) {
 
   return (
     <MotionDiv
-      className="grid grid-cols-1 md:grid-cols-3 gap-8"
+      className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}

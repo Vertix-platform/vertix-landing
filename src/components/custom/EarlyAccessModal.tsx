@@ -15,11 +15,13 @@ import { actions } from 'astro:actions';
 interface EarlyAccessModalProps {
   trigger?: React.ReactNode;
   className?: string;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function EarlyAccessModal({
   trigger,
-  className = ""
+  className = "",
+  onOpenChange
 }: EarlyAccessModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -55,7 +57,10 @@ export function EarlyAccessModal({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => {
+      setIsOpen(open);
+      onOpenChange?.(open);
+    }}>
       <DialogTrigger asChild>
         {trigger || (
           <Button

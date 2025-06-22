@@ -1,29 +1,9 @@
 ---
-// src/components/HowItWorks.astro
+// src/components/sections/HowItWorks.astro
 import { MotionDiv } from "./ui/motion";
-import { GlowingEffect } from "./ui/glowing-effect";
+import { CustomGrid } from "./custom/custom-grid";
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-interface Step {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-const steps: Step[] = [
+const steps = [
   {
     icon: "ri-search-line",
     title: "Browse Assets",
@@ -32,7 +12,12 @@ const steps: Step[] = [
   {
     icon: "ri-add-line",
     title: "Create an Account",
-    description: "Sign up for a Vertix account to start buying and selling digital assets."
+    description: "For sellers, sign up, connect your wallet and verify* for a Vertix account to start selling digital assets and build trust."
+  },
+  {
+    icon: "ri-wallet-line",
+    title: "Connect your wallet",
+    description: "For buyers, only connect your wallet to the Vertix platform to start buying assets."
   },
   {
     icon: "ri-arrow-left-right-line",
@@ -43,58 +28,22 @@ const steps: Step[] = [
 ---
 
 <section id="how-it-works" class="py-16 px-4 lg:px-8" aria-labelledby="how-it-works-heading">
-  <div class="text-white">
-    <MotionDiv 
+  <div class="">
+    <MotionDiv
       client:visible
+      className="text-center mb-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0 }
+      }}
       transition={{ duration: 0.5 }}
-      variants={itemVariants}
     >
-      <h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold text-center mb-12">How It Works</h2>
+      <h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold text-white mb-6">How It Works</h2>
     </MotionDiv>
 
-    <MotionDiv
-      client:visible
-      className="grid grid-cols-1 md:grid-cols-3 gap-8"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={containerVariants}
-    >
-      {steps.map((step, index) => (
-        <MotionDiv
-          variants={itemVariants}
-          className="relative rounded-2xl border border-white/10"
-          key={index}
-        >
-            <GlowingEffect
-              spread={30}
-              glow={true}
-              disabled={false}
-              proximity={40}
-              inactiveZone={0.01}
-              client:visible
-            />
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-lg bg-zinc-800/50 p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D]">
-              <div class="flex flex-col gap-6">
-                <div class="w-12 h-12 border border-white/20 rounded-lg flex items-center justify-center">
-                  <i class={`${step.icon} text-2xl`}></i>
-                </div>
-                <div class="space-y-4">
-                  <h3 class="text-xl font-bold">{step.title}</h3>
-                  <p class="text-white/70">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-              <div class="mt-6 text-sm font-medium text-white/50">
-                Step {index + 1}
-              </div>
-            </div>
-        </MotionDiv>
-      ))}
-    </MotionDiv>
+    <CustomGrid items={steps} showSteps={true} client:load />
   </div>
 </section>

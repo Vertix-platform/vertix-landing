@@ -31,7 +31,7 @@ const socialLinks = [
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
       >
-        <p class="text-2xl md:text-3xl text-white/80 font-medium max-w-xl">Empowering gamers, creators, and digital entrepreneurs to control their digital assets.</p>
+      <p class="text-2xl md:text-3xl text-white/80 font-medium max-w-xl">Empowering gamers, creators, and digital entrepreneurs to control their digital assets.</p>
       </MotionDiv>
 
       <MotionDiv
@@ -41,12 +41,12 @@ const socialLinks = [
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
       >
-        <div class="mt-8">
-          <EarlyAccessModal
-            client:load
-            className="px-5 py-3 h-12"
-          />
-        </div>
+      <div class="mt-8">
+        <EarlyAccessModal
+          client:load
+          className="px-5 py-3 h-12"
+        />
+      </div>
       </MotionDiv>
     </div>
 
@@ -59,7 +59,7 @@ const socialLinks = [
         transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         className="flex gap-4"
       >
-        {socialLinks.map(link => (
+      {socialLinks.map(link => (
           <a 
             href={link.href} 
             class="rounded-xl bg-white/10 backdrop-blur-md p-3 border border-white/30"
@@ -68,8 +68,8 @@ const socialLinks = [
             rel="noopener noreferrer"
           >
             <i class={`${link.icon} text-2xl text-white`} aria-hidden="true"></i>
-          </a>
-        ))}
+        </a>
+      ))}
       </MotionDiv>
     </nav>
   </div>

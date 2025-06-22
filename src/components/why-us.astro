@@ -1,28 +1,8 @@
 ---
 import { MotionDiv } from "./ui/motion";
-import { GlowingEffect } from "./ui/glowing-effect";
+import { WhyChooseGrid } from "./custom/why-choose-grid";
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-interface BenefitItem {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-const benefits: BenefitItem[] = [
+const benefits = [
   {
     icon: "ri-search-line",
     title: "Decentralized Platform",
@@ -42,52 +22,22 @@ const benefits: BenefitItem[] = [
 ---
 
 <section id="why-us" class="py-16 px-4 lg:px-8" aria-labelledby="why-us-heading">
-  <div class="text-white">
+  <div class="">
     <MotionDiv
       client:visible
+      className="text-center mb-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0 }
+      }}
       transition={{ duration: 0.5 }}
-      variants={itemVariants}
     >
-      <h2 id="why-us-heading" class="text-4xl md:text-5xl font-bold text-center mb-12">Why Choose Vertix</h2>
+      <h2 id="why-us-heading" class="text-4xl md:text-5xl font-bold text-white mb-6">Why Choose Vertix</h2>
     </MotionDiv>
-    
-    <MotionDiv
-      client:visible
-      className="grid grid-cols-1 md:grid-cols-3 gap-8"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={containerVariants}
-    >
-      {benefits.map((benefit) => (
-        <MotionDiv 
-          variants={itemVariants}
-          className="relative rounded-2xl border border-white/10 cursor-pointer"
-        >
-            <GlowingEffect
-                spread={30}
-                glow={true}
-                disabled={false}
-                proximity={40}
-                inactiveZone={0.01}
-                client:visible
-            />
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-lg bg-zinc-800/50 p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D]">
-              <div class="w-12 h-12 border border-white/20 rounded-lg flex items-center justify-center mb-6">
-                <i class={`${benefit.icon} text-2xl`}></i>
-              </div>
-              <div class="space-y-4">
-                <h3 class="text-xl font-bold">{benefit.title}</h3>
-                <p class="text-white/70">
-                  {benefit.description}
-                </p>
-              </div>
-            </div>
-        </MotionDiv>
-      ))}
-    </MotionDiv>
+
+    <WhyChooseGrid items={benefits} client:load />
   </div>
 </section>
