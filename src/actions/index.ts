@@ -38,7 +38,7 @@ export const server = {
         });
 
         const { data, error } = await resend.emails.send({
-          from: 'onboarding@vertix.market',
+          from: 'onboarding@resend.dev',
           to: email,
           subject: 'Welcome to Vertix!',
           react: WelcomeEmail({ name }),
