@@ -1,9 +1,5 @@
 import { ActionError, defineAction } from "astro:actions";
-import { Resend } from 'resend';
-import WelcomeEmail from '../emails/welcome';
-
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-const audienceId = import.meta.env.RESEND_AUDIENCE_ID;
+import { createUser, getUserByEmail } from '../db/queries';
 
 export const server = {
   subscribe: defineAction({
@@ -20,41 +16,30 @@ export const server = {
         });
       }
 
-      if (!audienceId) {
-        console.error('RESEND_AUDIENCE_ID is not configured.');
-        throw new ActionError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Something went wrong."
-        });
-      }
-
       try {
-        await resend.contacts.create({
-          email,
-          firstName: name,
-          lastName: country,
-          audienceId,
-          unsubscribed: false,
-        });
-
-        const { data, error } = await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: email,
-          subject: 'Welcome to Vertix!',
-          react: WelcomeEmail({ name }),
-        });
-
-        if (error) {
+        // Check if user already exists
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
           throw new ActionError({
             code: "BAD_REQUEST",
-            message: error.message,
+            message: "You're already on our early access list!"
           });
         }
 
+        // Create new user in database
+        const user = await createUser(email, name, country);
+
         return {
           success: true,
-          message: 'Successfully subscribed!',
-          data
+          message: 'Successfully joined early access!',
+          data: {
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              country: user.country
+            }
+          }
         };
       } catch (error) {
         console.error(error);
@@ -63,7 +48,7 @@ export const server = {
         }
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Something went wrong."
+          message: "Something went wrong. Please try again."
         });
       }
     },
