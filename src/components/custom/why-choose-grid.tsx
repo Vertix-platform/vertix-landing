@@ -33,7 +33,7 @@ const itemVariants = {
 export function WhyChooseGrid({ items, columns = 3, showSteps = false }: CardGridProps) {
   return (
     <MotionDiv
-      className={`grid grid-cols-1 md:grid-cols-${columns} gap-8`}
+      className={`grid grid-cols-1 md:grid-cols-${columns} 2xl:grid-cols-4 gap-8`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
