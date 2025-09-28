@@ -15,10 +15,10 @@ interface FeatureCardProps {
 }
 
 const iconMap = {
-  HybridIcon: "/src/assets/icons/HybridIcon.svg",
-  CreatorNFTIcon: "/src/assets/icons/CreatorNFTIcon.svg",
-  SecureIcon: "/src/assets/icons/SecureIcon.svg",
-  VerificationIcon: "/src/assets/icons/VerificationIcon.svg"
+  HybridIcon: "/icons/HybridIcon.svg",
+  CreatorNFTIcon: "/icons/CreatorNFTIcon.svg",
+  SecureIcon: "/icons/SecureIcon.svg",
+  VerificationIcon: "/icons/VerificationIcon.svg"
 };
 
 

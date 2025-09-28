@@ -1,6 +1,5 @@
 import { GlowingEffect } from "../ui/glowing-effect";
 import { MotionDiv } from "../ui/motion";
-import { Image } from 'astro:assets';
 
 interface CardItem {
   icon: string;
@@ -32,10 +31,10 @@ const itemVariants = {
 };
 
 const iconMap = {
-  DecentralizedIcon: "/src/assets/icons/DecentralizedIcon.svg",
-  DiverseAssetIcon: "/src/assets/icons/DiverseAssetIcon.svg",
-  CreatorAdvantagesIcon: "/src/assets/icons/CreatorAdvantagesIcon.svg",
-  EscrowIcon: "/src/assets/icons/EscrowIcon.svg"
+  DecentralizedIcon: "/icons/DecentralizedIcon.svg",
+  DiverseAssetIcon: "/icons/DiverseAssetIcon.svg",
+  CreatorAdvantagesIcon: "/icons/CreatorAdvantagesIcon.svg",
+  EscrowIcon: "/icons/EscrowIcon.svg"
 };
 
 export function WhyChooseGrid({ items, columns = 2, showSteps = false }: CardGridProps) {
