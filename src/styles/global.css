@@ -119,4 +119,19 @@
   body {
       @apply bg-background text-foreground scroll-smooth;
     }
+    .glassmorphism {
+        backdrop-filter: blur(43px);
+        background-color: rgba(0, 0, 0, 0.21);
+        box-shadow: inset 5px 5px 15px rgba(133, 112, 199, 0.25),
+                    inset -5px -5px 15px rgba(133, 112, 199, 0.25);
+                    /* 10px 10px 20px rgba(0, 0, 0, 0.25); */
+    }
+
+    .gradient-advantage-1 {
+        background: linear-gradient(285.67deg, rgba(133,112,199,0.05) 0%, rgba(65,55,97,0) 65.36%);
+    }
+
+    .gradient-advantage-4 {
+        background: linear-gradient(291.59deg, rgba(65,55,97,0) 39.74%, rgba(133,112,199,0.05) 100%);
+    }
 }

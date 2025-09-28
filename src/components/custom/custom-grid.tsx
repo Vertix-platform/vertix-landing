@@ -1,5 +1,6 @@
 import { GlowingEffect } from "../ui/glowing-effect";
 import { MotionDiv } from "../ui/motion";
+import { Icon } from "@iconify/react";
 
 interface CardItem {
   icon: string;
@@ -41,7 +42,7 @@ export function CustomGrid({ items, columns = 3, showSteps = false }: CardGridPr
     >
       {items.map((item, index) => (
         <MotionDiv variants={itemVariants} key={index}>
-          <div className="relative rounded-2xl border border-white/10 h-full flex flex-col">
+          <div className="relative rounded-2xl h-full flex flex-col">
             <GlowingEffect
               spread={30}
               glow={true}
@@ -49,21 +50,21 @@ export function CustomGrid({ items, columns = 3, showSteps = false }: CardGridPr
               proximity={40}
               inactiveZone={0.01}
             />
-            <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-lg bg-zinc-800/50 p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D]">
-              <div className="flex flex-col gap-6">
-                <div className="w-12 h-12 border border-white/20 rounded-lg flex items-center justify-center">
-                  <i className={`${item.icon} text-2xl`} aria-hidden="true"></i>
+            <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-lg bg-zinc-800/50 p-6 glassmorphism">
+              {showSteps && (
+                <div className="text-xl font-bold text-accent">
+                  Step {index + 1}
                 </div>
-                <div className="space-y-4">
+              )}
+              <div className="flex items-center justify-center flex-col gap-6 mt-7.5">
+                <div className="w-[70px] h-[70px] border-[3px] inset-shadow-border border-[#8570C7]/35 rounded-[20px] flex items-center justify-center bg-gradient-to-tl from-[#8570C7]/0 to-[#8570C7]/50">
+                  <Icon icon={item.icon} width={40} height={40} className="text-accent" />
+                </div>
+                <div className="space-y-4 text-center">
                   <h3 className="text-xl font-bold">{item.title}</h3>
                   <p className="text-white">{item.description}</p>
                 </div>
               </div>
-              {showSteps && (
-                <div className="mt-6 text-sm font-medium text-white/50">
-                  Step {index + 1}
-                </div>
-              )}
             </div>
           </div>
         </MotionDiv>
